@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "actions-helper"
+version = "0.1.0"
+description = "Проект, который упрощает работу с GitHub Actions"
+authors = ["temapskov <psk@ro.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.110.1"
+pydantic-settings = "^2.2.1"
+uvicorn = "^0.29.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
