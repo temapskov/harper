@@ -1,6 +1,5 @@
 SVG_BANNER = """
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="99" height="20">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="99" height="20">
     <linearGradient id="b" x2="0" y2="100%">
         <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
         <stop offset="1" stop-opacity=".1"/>
@@ -17,7 +16,7 @@ SVG_BANNER = """
         <text x="31.5" y="15" fill="#010101" fill-opacity=".3">coverage</text>
         <text x="31.5" y="14">coverage</text>
         <text x="80" y="15" fill="#010101" fill-opacity=".3">{count}%</text>
-        <text x="80" y="14">60%</text>
+        <text x="80" y="14">{count}%</text>
     </g>
 </svg>
 """
