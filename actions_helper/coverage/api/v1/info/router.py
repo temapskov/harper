@@ -27,8 +27,8 @@ manager = CoverageManager(PickleCoverageStorage(Path("test.pickle")))
 
 
 @router.get("/")
-async def set_coverage_value_by_repo_name(repo_name: str, value: str) -> CoverageInfo:
-    coverage = CoverageInfo(name=repo_name, total_coverage=value)
+async def set_coverage_value_by_repo_name(repo_name: str, value: float) -> CoverageInfo:
+    coverage = CoverageInfo(name=repo_name, total_coverage=int(value))
     manager.set_coverage_value(coverage)
     return coverage
 
