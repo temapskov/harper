@@ -52,7 +52,7 @@ jobs:
 
         - name: Подсчет покрытия
           id: total-coverage-value
-          run: echo TOTAL=$(lcov-total coverage.lcov | cut -c 1-2) >> $GITHUB_OUTPUT
+          run: echo TOTAL=$(lcov-total coverage.lcov) >> $GITHUB_OUTPUT
 
         - name: Отправка данных для генерации баннера
           run: |
