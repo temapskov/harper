@@ -47,8 +47,6 @@ jobs:
         - name: Установка зависимостей проекта
           run: poetry install --with dev
 
-        - name: Добавление виртуального окружения
-
         - name: Запуск тестов
           run: GH_TOKEN=TEST poetry run pytest --cov=actions_helper tests/ --cov-report term --cov-report lcov --cov-report xml:coverage.xml
 
