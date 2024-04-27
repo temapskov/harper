@@ -1,0 +1,59 @@
+name: Tests and Coverage
+
+on:
+    workflow_dispatch:
+    push:
+
+jobs:
+  tests_and_coverage:
+      name: Тестирование приложения
+      runs-on: ubuntu-latest
+
+      strategy:
+          matrix:
+            python-version: ["3.11", "3.12"]
+
+      steps:
+        - name: Копирование репозитория
+          uses: actions/checkout@v4
+
+        - name: Установка NodeJS
+          uses: actions/setup-node@v4
+          with:
+            node-version: '20'
+
+        - name: Установка lcov-total
+          run: npm install -g lcov-total
+
+        - name: Установка Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v5
+          with:
+            python-version: ${{ matrix.python-version }}
+
+        - name: Установка Poetry
+          uses: abatilo/actions-poetry@v3
+
+        - name: Настройка Poetry
+          run: |
+            poetry config virtualenvs.create true --local
+            poetry config virtualenvs.in-project true --local
+
+        - uses: actions/cache@v4
+          name: Определяем кэш для виртуальной среды на основе файл poetry.lock
+          with:
+            path: ./.venv
+            key: venv-${{ hashFiles('poetry.lock') }}
+
+        - name: Установка зависимостей проекта
+          run: poetry install --with dev
+
+        - name: Запуск тестов
+          run: poetry run pytest --cov=actions_helper tests/ --cov-report term --cov-report lcov --cov-report xml:coverage.xml
+
+        - name: Подсчет покрытия
+          id: total-coverage-value
+          run: echo TOTAL=$(lcov-total coverage.lcov | cut -c 1-2) >> $GITHUB_OUTPUT
+
+        - name: Отправка данных для генерации баннера
+          run: |
+            curl -X GET "https://harper.quantcore.space/v1/info/?repo_name=${{ github.repository }}&value=${{ steps.total-coverage-value.outputs.TOTAL }}"
