@@ -1,5 +1,5 @@
 # Harper
-[![Coverage](https://harper.quantcore.space/v1/info/banner?repo_name=temapskov/harper)](https://harper.quantcore.space/v1/info/banner?repo_name=temapskov/harper)
+[![Coverage](https://harper.quantcore.space/v1/info/temapskov/harper/banner.svg)](https://harper.quantcore.space/v1/info/temapskov/harper/banner.svg)
 ___
 
 `Harper` это помощник для разработчиков, который сможет помочь в решении различных
