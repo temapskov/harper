@@ -18,7 +18,7 @@ async def set_coverage_value_by_repo_name(repo_name: str, value: float) -> Cover
     return coverage
 
 
-@router.get("/banner")
+@router.get("/{repo_name}/banner.svg")
 async def get_banner_for_repo_by_repo_name(repo_name: str) -> str:
     coverage = manager.get_coverage_value(repo_name)
     return Response(content=svg_from_percent(coverage), media_type="image/svg+xml")
