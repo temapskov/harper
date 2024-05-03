@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from fastapi import APIRouter, Response
+from fastapi import Path as FastapiPath
 
 from actions_helper.config import settings
 from actions_helper.coverage.api.v1.info.service import svg_from_percent
@@ -18,7 +19,7 @@ async def set_coverage_value_by_repo_name(repo_name: str, value: float) -> Cover
     return coverage
 
 
-@router.get("/{repo_name}/banner.svg")
-async def get_banner_for_repo_by_repo_name(repo_name: str) -> str:
+@router.get("/{repo_name:path}/banner.svg")
+async def get_banner_for_repo_by_repo_name(repo_name: str = FastapiPath(...)) -> str:
     coverage = manager.get_coverage_value(repo_name)
     return Response(content=svg_from_percent(coverage), media_type="image/svg+xml")
